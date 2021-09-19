@@ -37,11 +37,17 @@ class StockSerializer(serializers.ModelSerializer):
         positions = validated_data.pop('positions')
         stock = super().update(instance, validated_data)
         positions_instance = instance.positions.all()
-        w = 0
-        for r in positions_instance:
-            r.price = positions[w]['price']
-            r.quantity = positions[w]['quantity']
-            r.save()
-            w += 1
 
+        for r in positions_instance:
+            for w in positions:
+                if r.product == w['product']:
+
+                    if 'price' in w:
+                        r.price = w['price']
+                    if 'quantity' in w:
+                        r.quantity = w['quantity']
+        if r.product.id != w['product'].id:
+           StockProduct.objects.create(product=w['product'], price=w['price'],quantity=w['quantity'],stock_id=r.stock_id)
+
+        r.save()
         return stock
