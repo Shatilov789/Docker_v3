@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'logistic',
+    'psycopg2'
 
 ]
 
@@ -86,12 +87,12 @@ WSGI_APPLICATION = 'stocks_products.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'stock',
-        'USER': 'postgres',
-        'PASSWORD': 'Po625493',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'prod_db',
+        'USER': 'admin',
+        'PASSWORD': 'shatia',
+        'HOST': 'postgresdb',
+        'PORT': 5432,
     }
 }
 
